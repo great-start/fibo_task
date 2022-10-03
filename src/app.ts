@@ -1,8 +1,8 @@
 import express, { Express } from "express";
+import { createClient } from "redis";
 import dotenv from "dotenv";
 
 import { apiRouter } from "./router/api.router";
-import { createClient } from "redis";
 
 dotenv.config();
 

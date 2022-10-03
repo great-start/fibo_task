@@ -1,9 +1,6 @@
 FROM node:16-alpine
 
-LABEL release-date="28-09-2022"
-
-#RUN addgroup app && adduser -S -G app app
-#USER app
+LABEL release-date="03-10-2022"
 
 WORKDIR /usr/src/app
 COPY --chown=node:node package*.json ./
