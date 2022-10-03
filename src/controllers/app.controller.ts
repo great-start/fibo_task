@@ -10,8 +10,8 @@ class AppController {
 
       if (number === 0) {
         res.status(400).json({
-          message: 'Index must start with 1',
-          error: 'Bad request',
+          message: "Index must start with 1",
+          error: "Bad request",
           statusCode: 400,
         });
         return;
@@ -45,12 +45,10 @@ class AppController {
       const fiboNumber = fibonacci(Number(number));
 
       if (fiboNumber) await redisService.saveNumber(ticketNumber, fiboNumber);
-
-
     } catch (e: any) {
       res.status(500).json({
-        message: 'Server error',
-        error: 'Internal Server Error',
+        message: "Server error",
+        error: "Internal Server Error",
         statusCode: 500,
       });
     }
@@ -64,19 +62,19 @@ class AppController {
 
       if (!number) {
         res.status(404).json({
-          message: 'Ticket not found',
-          error: 'Not found',
+          message: "Ticket not found",
+          error: "Not found",
           statusCode: 404,
         });
       }
 
       res.json({
-        Fibonacci: number
-      })
+        Fibonacci: number,
+      });
     } catch (e: any) {
       res.status(500).json({
-        message: 'Server error',
-        error: 'Internal Server Error',
+        message: "Server error",
+        error: "Internal Server Error",
         statusCode: 500,
       });
     }
