@@ -6,17 +6,22 @@ class AppController {
         try {
             const { number } = req.body;
 
-            function fibonacci(num: number){
-                var a = 1, b = 0, temp;
+            function fibonacci(index: number){
+                let i,b, fib = [];
 
-                while (num >= 0){
-                    temp = a;
-                    a = a + b;
-                    b = temp;
-                    num--;
+                fib[0] = 0;
+                fib[1] = 1;
+                if (index === 0) return res.status(400).json({message: 'index must start with 1'});
+                if (index === 1) return fib[0];
+                if (index === 2 || index === 3) return fib[1];
+
+                for (i = 2, b = 1; b <= index; i+=1, b+=1) {
+                    fib[i] = fib[i-2] + fib[i-1]; // generate the rest of the fibonacci array
+                    console.log('tick');
+                    if (index === b) { // if we find the number
+                        return fib[i-2]; //return it
+                    }
                 }
-
-                return b;
             }
 
             const number1 = fibonacci(Number(number));

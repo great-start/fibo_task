@@ -6,6 +6,8 @@ import { apiRouter } from "./router/api.router";
 dotenv.config();
 
 const app: Express = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use('/', apiRouter);
 
