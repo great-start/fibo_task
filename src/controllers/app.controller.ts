@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { v4 as uuidv4 } from "uuid";
+
 import { redisService } from "../services/redis.service";
 
 class AppController {
@@ -8,7 +9,11 @@ class AppController {
       const { number } = req.body;
 
       if (number === 0) {
-        res.status(400).json({ message: "index must start with 1" });
+        res.status(400).json({
+          message: 'Index must start with 1',
+          error: 'Bad request',
+          statusCode: 400,
+        });
         return;
       }
 
@@ -43,12 +48,11 @@ class AppController {
 
 
     } catch (e: any) {
-      throw new Error(e)
-      // res.status(500).json({
-      //     message: 'Server error',
-      //     error: 'Internal Server Error',
-      //     statusCode: 500,
-      // });
+      res.status(500).json({
+        message: 'Server error',
+        error: 'Internal Server Error',
+        statusCode: 500,
+      });
     }
   }
 
@@ -58,11 +62,23 @@ class AppController {
 
       const number = await redisService.getNumber(ticket);
 
+      if (!number) {
+        res.status(404).json({
+          message: 'Ticket not found',
+          error: 'Not found',
+          statusCode: 404,
+        });
+      }
+
       res.json({
         Fibonacci: number
       })
     } catch (e: any) {
-      throw new Error(e);
+      res.status(500).json({
+        message: 'Server error',
+        error: 'Internal Server Error',
+        statusCode: 500,
+      });
     }
   }
 }

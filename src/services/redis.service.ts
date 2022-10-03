@@ -1,4 +1,4 @@
-import { RedisClient } from '../app';
+import {RedisClient} from '../app';
 
 class RedisService {
     async saveNumber(ticketNumber: string, fiboNumber: number) {
@@ -9,9 +9,9 @@ class RedisService {
     }
 
     async getNumber(ticketNumber: string) {
-        const string = await RedisClient.get(ticketNumber);
-        return string;
+        return await RedisClient.get(ticketNumber);
     }
+
 }
 
 export const redisService = new RedisService();
